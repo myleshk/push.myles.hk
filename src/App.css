@@ -38,4 +38,5 @@ a.download-btn {
   background: linear-gradient(276.18deg, #ff373c 4.68%, #ff5757 83.21%);
   border-radius: 19px;
   text-decoration: none;
+  text-align: center;
 }

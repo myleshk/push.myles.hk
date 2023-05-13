@@ -1,3 +1,4 @@
+import React from 'react';
 import phoneImage from '../assets/phone.png';
 
 export default function Phone() {
