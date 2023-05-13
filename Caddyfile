@@ -1,0 +1,4 @@
+push.mylesapp.com {
+	root * ./out
+    file_server
+}
