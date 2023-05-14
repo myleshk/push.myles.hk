@@ -1,5 +1,5 @@
 import React from 'react';
-import phoneImage from '../assets/phone.png';
+import phoneImage from '../assets/phone.jpg';
 
 export default function Phone() {
     const message = "Hello World! 3";

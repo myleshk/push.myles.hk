@@ -28,8 +28,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "prebuild": "rm -rf docs",
     "build": "react-scripts build",
-    "postbuild": "mv build/ docs/",
+    "postbuild": "mv build docs",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
