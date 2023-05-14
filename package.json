@@ -30,7 +30,7 @@
     "start": "react-scripts start",
     "prebuild": "rm -rf docs",
     "build": "react-scripts build",
-    "postbuild": "mv build docs",
+    "postbuild": "mv build docs && echo 'github.push.myles.hk' > docs/CNAME",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
