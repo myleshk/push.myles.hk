@@ -1,8 +1,12 @@
 import React from 'react';
 import phoneImage from '../assets/phone.jpg';
+import AnimatedSpan from './AnimatedSpan';
 
-export default function Phone() {
-    const message = "Hello World! 3";
+interface Props {
+    message?: string
+}
+
+export default function Phone({ message }: Props) {
 
     return (
         <div className="phone">
@@ -12,8 +16,6 @@ export default function Phone() {
                 width="190"
                 height="410"
             />
-            <span className="message">
-                {message}
-            </span>
+            <AnimatedSpan content={message} duration={5} />
         </div>)
 }

@@ -1,4 +1,4 @@
 push.mylesapp.com {
-	root * ./build
+	root * ./docs
     file_server
 }
