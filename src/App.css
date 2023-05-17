@@ -1,16 +1,3 @@
-main {
-  justify-content: center;
-  align-items: center;
-  height: 100svh;
-  display: flex;
-  flex-direction: column;
-}
-
-.phone {
-  margin-top: 40px;
-  position: relative;
-}
-
 .marquee_box {
   position: absolute;
   top: 28px;
@@ -34,21 +21,4 @@ main {
 .marquee_box:hover p {
   animation-play-state: paused;
   cursor: default;
-}
-
-a.download-btn {
-  display: block;
-  margin: 52px auto 0;
-  width: 160px;
-  height: 38px;
-  line-height: 38px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  background: -webkit-linear-gradient(173.82deg, #ff373c 4.68%, #ff5757 83.21%);
-  background: -moz-linear-gradient(173.82deg, #ff373c 4.68%, #ff5757 83.21%);
-  background: linear-gradient(276.18deg, #ff373c 4.68%, #ff5757 83.21%);
-  border-radius: 19px;
-  text-decoration: none;
-  text-align: center;
 }

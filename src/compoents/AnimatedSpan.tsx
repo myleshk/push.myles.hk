@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import styled from "styled-components";
 
-interface TextScrollProps {
+interface AnimatedSpanProps {
     /**
      * 内容
      */
@@ -10,35 +10,35 @@ interface TextScrollProps {
      * 持续时间/s
      */
     duration: number
-  }
-  
-  function TextScroll(props: TextScrollProps) {
+}
+
+function AnimatedSpan(props: AnimatedSpanProps) {
     const { content, duration } = props
-  
+
     const defaultState = {
-      contentWidth: 0,
-      left: 0,
-      duration,
+        contentWidth: 0,
+        left: 0,
+        duration,
     }
-  
+
     const [state, setState] = useState(defaultState)
-  
+
     let ref = useRef<HTMLParagraphElement>(null)
-  
+
     useEffect(() => {
-      const { offsetWidth, parentElement } = ref.current as HTMLParagraphElement
-  
-      setState({
-        ...state,
-        contentWidth: offsetWidth,
-        left: parentElement!.offsetWidth,
-      })
+        const { offsetWidth, parentElement } = ref.current as HTMLParagraphElement
+
+        setState({
+            ...state,
+            contentWidth: offsetWidth,
+            left: parentElement!.offsetWidth,
+        })
     }, [content])
-  
+
     const { contentWidth, left, duration: timing } = state
-  
+
     const animationName = `marquee_${contentWidth}`
-  
+
     const Text = styled.p`
       position: relative;
       left: ${left}px;
@@ -56,16 +56,16 @@ interface TextScrollProps {
         }
       }
     `
-  
+
     return (
-      <div className="marquee_box">
-        <Text ref={ref}>{content}</Text>
-      </div>
+        <div className="marquee_box">
+            <Text ref={ref}>{content}</Text>
+        </div>
     )
-  }
-  TextScroll.defaultProps = {
+}
+AnimatedSpan.defaultProps = {
     content: '',
     duration: 3,
-  }
-  
-  export default React.memo(TextScroll)
+}
+
+export default React.memo(AnimatedSpan)

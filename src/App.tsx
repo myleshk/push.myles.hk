@@ -1,19 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import logo from './assets/logo.png';
 import './App.css';
 import Phone from './compoents/Phone';
 import OneSignal from 'react-onesignal';
+import { Notification } from './types';
+import styled from 'styled-components';
 
-type Notification = {
-  id: string;
-  heading: string;
-  content: string;
-  data: any;
-};
+const StyledMain = styled.main`
+position: relative;
+justify-content: center;
+align-items: center;
+height: 100svh;
+display: flex;
+flex-direction: column;
+`
+
+const StyledAnchor = styled.a`
+display: block;
+margin: 52px auto 0;
+width: 160px;
+height: 38px;
+line-height: 38px;
+color: #fff;
+font-size: 14px;
+font-weight: 700;
+background: -webkit-linear-gradient(173.82deg, #ff373c 4.68%, #ff5757 83.21%);
+background: -moz-linear-gradient(173.82deg, #ff373c 4.68%, #ff5757 83.21%);
+background: linear-gradient(276.18deg, #ff373c 4.68%, #ff5757 83.21%);
+border-radius: 19px;
+text-decoration: none;
+text-align: center;
+`;
 
 function App() {
   const [initialized, setInitialized] = useState(false);
-  const [message, setMessage] = useState('');
+  const [notification, setNotification] = useState<Notification | null>(null);
+  const [detailShown, setDetailShown] = useState(false);
 
   useEffect(() => {
     OneSignal.init({
@@ -46,27 +68,32 @@ function App() {
         console.log('OneSignal prompt shown');
       });
 
-      OneSignal.addListenerForNotificationOpened((data: any) => {
-        const {content,heading} = data as Notification;
+      OneSignal.addListenerForNotificationOpened((notification: any) => {
         // window.alert("Received NotificationOpened:" + JSON.stringify(data))
-        setMessage(`${heading}：${content}`);
+        setNotification(notification as Notification)
       });
     })
 
   }, [setInitialized]);
 
+  const onButtonClick = useCallback(() => {
+    if (notification) {
+      setDetailShown(true)
+    }
+  }, [notification]);
+
   return (
-    <main>
+    <StyledMain>
       <img src={logo}
         alt="Logo"
         width="106"
         height="36"
       />
 
-      <Phone message={message} />
+      <Phone notification={notification} detailShown={detailShown} onDetailClose={setDetailShown.bind(undefined, false)} />
 
-      <a className="download-btn" href="https://article.zlink.toutiao.com/d13Q">下载今日头条</a>
-    </main>
+      <StyledAnchor href="#" onClick={onButtonClick}>下载今日头条</StyledAnchor>
+    </StyledMain>
   );
 }
 
