@@ -12,4 +12,5 @@ body {
 * {
   font-family: PingFang SC, Hiragino Sans GB, Microsoft YaHei,
     WenQuanYi Micro Hei, Helvetica Neue, Arial, sans-serif;
+  box-sizing: border-box;
 }

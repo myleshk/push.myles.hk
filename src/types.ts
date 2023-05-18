@@ -1,6 +1,8 @@
-export interface Notification {
+export interface Message {
     id: string;
     heading: string;
     content: string;
-    data: any;
+    data: {
+        timestamp: number;
+    }
 };

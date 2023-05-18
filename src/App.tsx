@@ -1,10 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './assets/logo.png';
 import './App.css';
 import Phone from './compoents/Phone';
 import OneSignal from 'react-onesignal';
-import { Notification } from './types';
+import { Message } from './types';
 import styled from 'styled-components';
+import { addMessage } from './helpers/messageStore';
+import Messages from './compoents/Messages';
 
 const StyledMain = styled.main`
 position: relative;
@@ -34,8 +36,8 @@ text-align: center;
 
 function App() {
   const [initialized, setInitialized] = useState(false);
-  const [notification, setNotification] = useState<Notification | null>(null);
-  const [detailShown, setDetailShown] = useState(false);
+  const [notification, setNotification] = useState<Message | null>(null);
+  const [messagesShown, setMessagesShown] = useState(false);
 
   useEffect(() => {
     OneSignal.init({
@@ -68,19 +70,19 @@ function App() {
         console.log('OneSignal prompt shown');
       });
 
-      OneSignal.addListenerForNotificationOpened((notification: any) => {
+      OneSignal.addListenerForNotificationOpened((message: any) => {
+        message = message as Message;
         // window.alert("Received NotificationOpened:" + JSON.stringify(data))
-        setNotification(notification as Notification)
+        setNotification(message)
+
+        /**
+         * Save to local storage
+         */
+        addMessage(message)
       });
     })
 
   }, [setInitialized]);
-
-  const onButtonClick = useCallback(() => {
-    if (notification) {
-      setDetailShown(true)
-    }
-  }, [notification]);
 
   return (
     <StyledMain>
@@ -90,9 +92,13 @@ function App() {
         height="36"
       />
 
-      <Phone notification={notification} detailShown={detailShown} onDetailClose={setDetailShown.bind(undefined, false)} />
+      <Phone notification={notification} />
 
-      <StyledAnchor href="#" onClick={onButtonClick}>下载今日头条</StyledAnchor>
+      {messagesShown && (
+        <Messages onClose={setMessagesShown.bind(undefined, false)} />
+      )}
+
+      <StyledAnchor href="#" onClick={setMessagesShown.bind(undefined, true)}>下载今日头条</StyledAnchor>
     </StyledMain>
   );
 }

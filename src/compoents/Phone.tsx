@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
 import phoneImage from '../assets/phone.jpg';
 import AnimatedSpan from './AnimatedSpan';
-import MessageDetail from './MessageDetail';
-import { Notification } from '../types';
+import { Message } from '../types';
 import styled from 'styled-components';
 
 const StyledContainer = styled.div`
@@ -11,12 +10,10 @@ position: relative;
 `;
 
 interface Props {
-    notification: Notification | null;
-    detailShown: boolean;
-    onDetailClose: () => void;
+    notification: Message | null;
 }
 
-export default function Phone({ notification, detailShown, onDetailClose }: Props) {
+export default function Phone({ notification }: Props) {
     const compactMessage = useMemo(() => {
         if (!notification) return '欢迎回来！';
         const { heading, content } = notification;
@@ -33,9 +30,6 @@ export default function Phone({ notification, detailShown, onDetailClose }: Prop
                 />
                 <AnimatedSpan content={compactMessage} duration={8} />
             </StyledContainer>
-            {detailShown && (
-                <MessageDetail notification={notification!} onClose={onDetailClose} />
-            )}
         </>
     )
 }
