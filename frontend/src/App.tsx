@@ -34,6 +34,17 @@ text-decoration: none;
 text-align: center;
 `;
 
+// setInterval(() => {
+//   addMessage({
+//     id: new Date().getTime().toString(),
+//     heading: new Array(10).fill('标题').join(' '),
+//     content: new Array(10).fill('内容').join('\t'),
+//     data: {
+//       timestamp: new Date().getTime()
+//     }
+//   })
+// }, 1000)
+
 function App() {
   const [initialized, setInitialized] = useState(false);
   const [notification, setNotification] = useState<Message | null>(null);

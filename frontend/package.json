@@ -1,5 +1,5 @@
 {
-  "name": "push.mylesapp.com",
+  "name": "push.mylesapp.com-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -30,9 +30,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "prebuild": "rm -rf docs",
     "build": "react-scripts build",
-    "postbuild": "mv build docs && echo 'push.mylesapp.com' > docs/CNAME && git add docs",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
